@@ -1,0 +1,33 @@
+{
+  "name": "simple-snake",
+  "version": "0.1.0",
+  "description": "A simple snake replica in arcade format",
+  "keywords": [
+    "snake",
+    "game",
+    "arcade"
+  ],
+  "homepage": "https://github.com/Razcoina/simple-snake#readme",
+  "bugs": {
+    "url": "https://github.com/Razcoina/simple-snake/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Razcoina/simple-snake.git"
+  },
+  "license": "GPL-3.0",
+  "author": "Pedro Duarte",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mysql2": "^3.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
