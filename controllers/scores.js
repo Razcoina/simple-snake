@@ -6,6 +6,12 @@ import { pool } from "../config/db.js";
  * */
 
 /**
+ * @typedef {Object} ScoreSubmission
+ * @property {string} name
+ * @property {number} score
+ * */
+
+/**
  * @param {Request} req
  * @param {Response} res
  * */
@@ -32,14 +38,19 @@ export async function getScores(req, res) {
  * @param {Response} res
  * */
 export async function postScore(req, res) {
+  /** @type {ScoreSubmission} */
   let { name, score } = req.body;
 
+  // Data validation
   name = name?.trim();
   score = Number(score);
 
-  // Data validation
   if (!name || !Number.isInteger(score)) {
     return res.status(400).json({ error: "Invalid input" });
+  }
+
+  if (name.length > 30) {
+    return res.status(400).json({ error: "Name is too long (30 chars max)" });
   }
 
   try {
