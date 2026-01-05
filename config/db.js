@@ -24,7 +24,7 @@ export async function initDB() {
 
     // Create the table if it doesn't exist
     await conn.query(`
-      CREATE TABLE IF NOT EXISTS \`${DB_DATABASE}\`.highscores (
+      CREATE TABLE IF NOT EXISTS \`${DB_DATABASE}\`.scores (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         score INT NOT NULL,
