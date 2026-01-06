@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Set the site to dark mode by default */
+:root {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --accent-color: #fc0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+button {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  cursor: pointer;
+}
+
+input,
+textarea {
+  padding: 0.4em;
+  border:
+    1px,
+    solid #333;
+  background-color: #1e1e1e;
+  color: var(--text-color);
+}
