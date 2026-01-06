@@ -22,6 +22,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 button {
   padding: 0.5em 1em;
   border: none;
@@ -33,9 +37,7 @@ button {
 input,
 textarea {
   padding: 0.4em;
-  border:
-    1px,
-    solid #333;
+  border: 1px solid #333;
   background-color: #1e1e1e;
   color: var(--text-color);
 }
