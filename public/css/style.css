@@ -1,43 +1,115 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #16201c, #0b0f0d);
+  --text-main: #e4e7e6;
+  --text-muted: #9aa5a0;
+  --accent-main: #6cf2a2;
+  --accent-dim: #3aa36f;
+  --canvas-bg: #050807;
+}
+
 * {
   box-sizing: border-box;
 }
 
-/* Set the site to dark mode by default */
-:root {
-  --bg-color: #121212;
-  --text-color: #f5f5f5;
-  --accent-color: #fc0;
-}
-
 body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
   margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-main);
+  font-family: "Space Grotesk", Verdana, sans-serif;
 }
 
-a {
-  color: var(--accent-color);
-  text-decoration: none;
+/* Container for the entire site */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg-gradient);
 }
 
-a:hover {
-  text-decoration: underline;
+/* Center column */
+.column-center {
+  max-width: 720px;
+  text-align: center;
 }
 
-button {
-  padding: 0.5em 1em;
-  border: none;
-  background-color: var(--accent-color);
-  color: var(--bg-color);
+/* Title and subtitle */
+.column-center h1 {
+  margin-bottom: 0.5rem;
+  color: var(--accent-main);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.column-center .subtitle {
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
+/* Game frame */
+.game-frame {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 4%),
+    rgb(255 255 255 / 1%)
+  );
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 6%),
+    0 20px 60px rgb(0 0 0 / 60%);
+}
+
+canvas {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  border-radius: 10px;
+  background: var(--canvas-bg);
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+/* Fullscreen button */
+.fullscreen-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
   cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
-input,
-textarea {
-  padding: 0.4em;
-  border: 1px solid #333;
-  background-color: #1e1e1e;
-  color: var(--text-color);
+.fullscreen-btn svg {
+  fill: currentcolor;
+}
+
+.fullscreen-btn:hover {
+  border-color: var(--accent-dim);
+  background: rgb(255 255 255 / 4%);
+  color: var(--text-main);
+}
+
+/* Instructions */
+.instructions {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-family: "Liberation Mono", monospace;
 }

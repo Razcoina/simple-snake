@@ -5,26 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FIX ME!</title>
     <link href="css/style.css" rel="stylesheet" />
+
+    <script src="js/controls.js" defer></script>
+    <script src="js/game.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>Snake game</h1>
-      <p>Eat. Grow. Don't crash.</p>
-    </header>
+    <div class="container">
+      <div class="column-center">
+        <h1>Snake game</h1>
+        <!--TODO: write something interesting here:-->
+        <p class="subtitle">Write something interesting</p>
 
-    <main>
-      <!-- Game section -->
-      <section id="game-container">
-        <canvas id="game" width="400" height="400">
-          Your browser does not support the canvas element.
-        </canvas>
+        <noscript>This game requires JavaScript to run</noscript>
 
-        <!-- Controls / info -->
-        <section id="ui">
-          <button id="start-btn">Start Game</button>
-          <button id="scores-btn">High Scores</button>
-        </section>
-      </section>
-    </main>
+        <div class="game-frame">
+          <canvas id="game" width="640" height="480">
+            Your browser does not support the canvas element.
+          </canvas>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="fullscreen-btn" title="Fullscreen">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path
+                d="M3 3h6v2H5v4H3V3zm12 0h6v6h-2V5h-4V3zM3 15h2v4h4v2H3v-6zm16 0h2v6h-6v-2h4v-4z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <p class="instructions">Use the arrow keys to play</p>
+        <p class="instructions">Press Esc to exit fullscreen</p>
+      </div>
+    </div>
   </body>
 </html>
