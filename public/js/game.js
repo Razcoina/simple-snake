@@ -1,11 +1,8 @@
-import { config } from "./config.js";
+import { STATES, engine, settings } from "./init.js";
 
-console.log(config.canvas); // the canvas
-console.log(config.ctx); // 2D context
-console.log(config.snakeColor); // "green"
+console.log(engine.canvas); // the canvas
+console.log(engine.ctx); // 2D context
+console.log(settings.snakeColor); // "green"
 
-// Use destructuring if you want short names
-const { canvas, ctx, TILE_SIZE } = config;
-
-ctx.fillStyle = config.snakeColor;
-ctx.fillRect(0, 0, TILE_SIZE, TILE_SIZE);
+engine.ctx.fillStyle = settings.snakeColor;
+engine.ctx.fillRect(0, 0, engine.TILE_SIZE, engine.TILE_SIZE);
