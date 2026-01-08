@@ -8,6 +8,9 @@ const ctxEl = canvasEl.getContext("2d");
 
 if (!ctxEl) throw new Error("2D context not available");
 
+console.log(canvasEl);
+console.log(ctxEl);
+
 // Resolution control
 const TILE_SIZE = 20;
 
@@ -51,6 +54,9 @@ export const engine = {
   // Engine speed
   tickrate: 200,
 
+  // Framerate
+  fps: 0,
+
   // Timestamp of previous frame
   lastTime: 0,
 
@@ -80,4 +86,5 @@ export const settings = {
   soundMute: false,
   musicVolume: 80,
   musicMute: false,
+  showFPS: true,
 };
