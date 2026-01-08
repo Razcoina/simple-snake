@@ -7,6 +7,6 @@ export const updateGame = () => {
 export const renderGame = () => {
   engine.ctx.clearRect(0, 0, engine.canvas.width, engine.canvas.height);
   engine.ctx.fillStyle = "#fff";
-  engine.ctx.font = "20px monospace";
+  engine.ctx.font = "24px VT323, monospace";
   engine.ctx.fillText("Playing - Enjoy!!!", 50, 50);
 };

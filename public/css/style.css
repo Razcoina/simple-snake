@@ -51,6 +51,7 @@ body {
 .column-center .subtitle {
   margin-bottom: 2rem;
   color: var(--text-muted);
+  font-size: clamp(1rem, 1vw, 1.5rem);
 }
 
 /* Game frame */
@@ -74,6 +75,7 @@ canvas {
   height: auto;
   border-radius: 10px;
   background: var(--canvas-bg);
+  image-rendering: pixelated;
 }
 
 .controls {

@@ -17,7 +17,7 @@ export function renderMenu() {
 
   ctx.clearRect(0, 0, engine.canvas.width, engine.canvas.height);
 
-  ctx.font = "24px monospace";
+  ctx.font = "28px VT323, monospace";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 

@@ -46,7 +46,7 @@ const stateManager = {
     }
 
     engine.ctx.save();
-    engine.ctx.font = "12px monospace";
+    engine.ctx.font = "16px VT323, monospace";
     engine.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
     engine.ctx.textAlign = "left";
     engine.ctx.textBaseline = "top";
