@@ -6,6 +6,7 @@ export const updateGame = () => {
 
 export const renderGame = () => {
   engine.ctx.clearRect(0, 0, engine.canvas.width, engine.canvas.height);
-
-  // draw snake as a single green square for now
+  engine.ctx.fillStyle = "#fff";
+  engine.ctx.font = "20px monospace";
+  engine.ctx.fillText("Playing - Enjoy!!!", 50, 50);
 };

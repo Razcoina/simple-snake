@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
 :root {
   --bg-gradient: linear-gradient(135deg, #16201c, #0b0f0d);
@@ -18,15 +18,15 @@ body {
   place-items: center;
   min-height: 100vh;
   margin: 0;
+  padding: 0;
   color: var(--text-main);
-  font-family: "Space Grotesk", Verdana, sans-serif;
+  font-family: "VT323", Verdana, sans-serif;
 }
 
 /* Container for the entire site */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
   min-height: 100vh;
@@ -42,6 +42,7 @@ body {
 
 /* Title and subtitle */
 .column-center h1 {
+  margin-top: 0;
   margin-bottom: 0.5rem;
   color: var(--accent-main);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -112,6 +113,6 @@ canvas {
 /* Instructions */
 .instructions {
   color: var(--text-muted);
-  font-size: 0.85rem;
-  font-family: "Liberation Mono", monospace;
+  font-size: 1.25rem;
+  font-family: "VT323", monospace;
 }
