@@ -11,5 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       document.exitFullscreen();
     }
+
+    canvas.focus();
   });
 });

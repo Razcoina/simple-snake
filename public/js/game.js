@@ -5,8 +5,14 @@ import stateManager from "./core/stateManager.js";
  * @param {DOMHighResTimeStamp} timestamp
  */
 function mainLoop(timestamp) {
+  // First frame, setup only
   if (!engine.lastTime) {
     engine.lastTime = timestamp;
+
+    // Focus on the canvas
+    engine.canvas.focus();
+
+    // Prevent fps counter from breaking
     requestAnimationFrame(mainLoop);
     return;
   }

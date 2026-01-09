@@ -75,6 +75,7 @@ canvas {
   height: auto;
   border-radius: 10px;
   background: var(--canvas-bg);
+  outline: none;
   image-rendering: pixelated;
 }
 
