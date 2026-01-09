@@ -108,7 +108,7 @@ export function drawCheckbox(
   { selected = false, checked = false, size = 28 } = {},
 ) {
   const box = checked ? "[X]" : "[ ]";
-  drawText(`${box} ${label}`, x, y, {
+  drawText(`${label} ${box}`, x, y, {
     color: selected ? defaultSelectedColor : defaultColor,
     size: size,
   });

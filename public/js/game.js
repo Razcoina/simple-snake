@@ -1,4 +1,4 @@
-import { engine } from "./core/init.js";
+import { engine, loadSettings } from "./core/init.js";
 import stateManager from "./core/stateManager.js";
 
 /**
@@ -8,6 +8,9 @@ function mainLoop(timestamp) {
   // First frame, setup only
   if (!engine.lastTime) {
     engine.lastTime = timestamp;
+
+    // Load stored settings
+    loadSettings();
 
     // Focus on the canvas
     engine.canvas.focus();

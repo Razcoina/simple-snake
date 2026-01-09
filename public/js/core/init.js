@@ -53,7 +53,7 @@ export const engine = {
   }),
 
   // Engine speed
-  tickrate: 200,
+  tickrate: 5,
 
   // Framerate
   fps: 0,
@@ -78,8 +78,7 @@ export const engine = {
 };
 
 // User settings
-// TODO: fetch user settings from localStorage
-export const settings = {
+export const defaultSettings = {
   snakeColor: "green",
   gridLines: true,
   warpWalls: false,
@@ -89,3 +88,103 @@ export const settings = {
   musicMute: false,
   showFPS: true,
 };
+
+/** @type {Partial<Record<keyof Settings, any>>} */
+const SETTINGS_RULES = {
+  snakeColor: ["green", "red", "blue", "yellow", "white"],
+  soundVolume: { min: 0, max: 100 },
+  musicVolume: { min: 0, max: 100 },
+};
+
+/**
+ * @typedef {typeof defaultSettings} Settings
+ */
+
+export let settings = { ...defaultSettings };
+
+/**
+ * Validate settings
+ *
+ * @param {Partial<Settings>} obj
+ * @returns {Settings}
+ */
+function validateSettings(obj) {
+  /** @type {Settings} */
+  const result = { ...defaultSettings };
+
+  /** @type {Array<keyof Settings>} */
+  const keys = /** @type {Array<keyof Settings>} */ (
+    Object.keys(defaultSettings)
+  );
+
+  for (const key of keys) {
+    if (!(key in obj)) continue;
+
+    const value = obj[key];
+    const def = defaultSettings[key];
+
+    // Type check
+    if (typeof value !== typeof def) {
+      console.warn(`Invalid type for setting "${key}", using default`);
+      continue;
+    }
+
+    // Semantic rules
+    const rule = SETTINGS_RULES[key];
+
+    // Enum rule
+    if (Array.isArray(rule)) {
+      if (!rule.includes(value)) {
+        console.warn(`Invalid value for "${key}", using default`);
+        continue;
+      }
+    }
+
+    // Numeric range rule
+    else if (rule && typeof rule === "object") {
+      if (typeof value !== "number") continue; // type guard (already checked before, but vtsls is super picky)
+      if (typeof value !== "number" || value < rule.min || value > rule.max) {
+        const clamped = Math.min(rule.max, Math.max(rule.min, value));
+        /** @type {any} */ (result)[key] = clamped;
+        continue;
+      }
+    }
+    /** @type {any} */ (result)[key] = value;
+  }
+
+  return result;
+}
+
+/**
+ * Loads save settings from local storage
+ * */
+export function loadSettings() {
+  const raw = localStorage.getItem("snakeGameSettings");
+
+  if (!raw) {
+    // First run → persist defaults
+    settings = { ...defaultSettings };
+    saveSettings();
+    return;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    settings = validateSettings(parsed);
+  } catch (err) {
+    console.warn("Failed to parse settings, using defaults", err);
+    settings = { ...defaultSettings };
+  }
+}
+
+/**
+ * Save current settings to localStorage
+ * */
+export function saveSettings() {
+  try {
+    const sanitized = validateSettings(settings);
+    localStorage.setItem("snakeGameSettings", JSON.stringify(sanitized));
+  } catch (err) {
+    console.warn("Failed to save settings", err);
+  }
+}
