@@ -37,6 +37,7 @@ export const engine = {
   ctx: ctxEl,
 
   // Always start on the menu
+  /** @type {0 | 1 | 2} */
   gameState: STATES.MENU,
 
   // Game grid, controlled by TITLE_SIZE
@@ -69,11 +70,11 @@ export const engine = {
   // Score for the current session
   score: 0,
 
+  // Difficulty selected (easy, medium, hard, insane)
+  difficulty: "medium",
+
   // If the game is paused
   paused: false,
-
-  // Prevent double turns
-  inputQueue: [],
 };
 
 // User settings
