@@ -26,7 +26,7 @@ export async function initDB() {
     await conn.query(`
       CREATE TABLE IF NOT EXISTS \`${DB_DATABASE}\`.scores (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(30) NOT NULL,
+        name VARCHAR(10) NOT NULL,
         score INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         deleted_at TIMESTAMP NULL

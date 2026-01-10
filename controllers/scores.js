@@ -49,8 +49,8 @@ export async function postScore(req, res) {
     return res.status(400).json({ error: "Invalid input" });
   }
 
-  if (name.length > 30) {
-    return res.status(400).json({ error: "Name is too long (30 chars max)" });
+  if (name.length > 10) {
+    return res.status(400).json({ error: "Name is too long (10 chars max)" });
   }
 
   try {
