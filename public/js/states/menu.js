@@ -1,5 +1,12 @@
 import { engine, settings, STATES, saveSettings } from "../core/init.js";
-import { drawButton, drawCheckbox, drawDial, drawGrid } from "../utils/draw.js";
+import { getScores, latestScores } from "../core/scores.js";
+import {
+  drawButton,
+  drawCheckbox,
+  drawDial,
+  drawGrid,
+  drawTable,
+} from "../utils/draw.js";
 import { input } from "../utils/input.js";
 
 let menuState = {
@@ -314,7 +321,7 @@ export const updateMenu = () => {
   }
 };
 
-export function renderMenu() {
+export async function renderMenu() {
   const ctx = engine.ctx;
 
   ctx.clearRect(0, 0, engine.canvas.width, engine.canvas.height);
@@ -325,30 +332,80 @@ export function renderMenu() {
 
   const currentItems = menus[menuState.currentMenu];
 
-  const spacing = 40; // space between items
-  const totalHeight = (currentItems.length - 1) * spacing; // total menu height
-  const startY = engine.canvas.height / 2 - totalHeight / 2; // center vertically
+  // --- Render Highscores ---
+  if (menuState.currentMenu === "highscores") {
+    // Fetch scores in the background (non-blocking)
+    // Also slow because it's sending requests to the server
+    getScores();
 
-  currentItems.forEach((item, i) => {
-    const selected = i === menuState.selectedIndex;
-    const x = engine.canvas.width / 2;
-    const y = startY + i * spacing;
+    const scores = latestScores;
 
-    switch (item.type) {
-      case "button":
-        drawButton(item.label, x, y, { selected });
-        break;
+    // Prepare columns
+    /** @type {import('../utils/draw.js').TableColumn[]} */
+    const columns = [
+      { key: "rank", label: "#", width: 4, align: "right" },
+      { key: "name", label: "Name", width: 12, align: "left" },
+      { key: "score", label: "Score", width: 10, align: "right" },
+    ];
 
-      case "checkbox":
-        drawCheckbox(item.label, x, y, {
-          selected,
-          checked: item.value,
-        });
-        break;
+    // Compute row height and font size
+    const bottomMargin = 60;
+    const topPadding = 12;
+    const availableHeight = engine.canvas.height - bottomMargin - 20;
+    const rowHeight = Math.floor(availableHeight / (scores.length + 2));
+    const fontSize = Math.min(24, rowHeight - 4);
 
-      case "dial":
-        drawDial(item.label, item.value.toString(), x, y, 2, { selected });
-        break;
-    }
-  });
+    // Vertical centering
+    const tableHeight = rowHeight * (scores.length + 2);
+    const startY =
+      (engine.canvas.height - bottomMargin - tableHeight) / 2 + topPadding;
+
+    // Horizontal centering
+    const tableCharWidth =
+      columns.reduce((sum, col) => sum + col.width, 0) + (columns.length - 1);
+
+    const charWidthPx = fontSize * 0.4;
+    const tablePixelWidth = tableCharWidth * charWidthPx;
+    const startX = Math.floor((engine.canvas.width - tablePixelWidth) / 2);
+
+    // Draw the table
+    drawTable(scores, columns, startX, startY, { rowHeight, size: fontSize });
+
+    // Back button
+    drawButton(
+      currentItems[0].label,
+      engine.canvas.width / 2,
+      startY + tableHeight + 30,
+      {
+        selected: 0 === menuState.selectedIndex,
+      },
+    );
+  } else {
+    const spacing = 40; // space between items
+    const totalHeight = (currentItems.length - 1) * spacing; // total menu height
+    const startY = engine.canvas.height / 2 - totalHeight / 2; // center vertically
+
+    currentItems.forEach((item, i) => {
+      const selected = i === menuState.selectedIndex;
+      const x = engine.canvas.width / 2;
+      const y = startY + i * spacing;
+
+      switch (item.type) {
+        case "button":
+          drawButton(item.label, x, y, { selected });
+          break;
+
+        case "checkbox":
+          drawCheckbox(item.label, x, y, {
+            selected,
+            checked: item.value,
+          });
+          break;
+
+        case "dial":
+          drawDial(item.label, item.value.toString(), x, y, 2, { selected });
+          break;
+      }
+    });
+  }
 }

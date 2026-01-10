@@ -6,8 +6,8 @@ const router = Router();
 
 // Limit the number of connections per client in a time interval
 const limiter = rateLimit({
-  windowMs: 2000,
-  limit: 2,
+  windowMs: 5000,
+  limit: 1,
   message: "Too many requests, slow down!",
   standardHeaders: "draft-8",
   legacyHeaders: false,
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
   res.sendFile("index.html", { root: "public" });
 });
 
-router.get("/scores", limiter, getScores);
+router.get("/scores", getScores);
 router.post("/scores", limiter, postScore);
 
 export default router;

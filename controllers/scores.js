@@ -22,7 +22,7 @@ export async function getScores(req, res) {
       FROM scores
       WHERE deleted_at IS NULL
       ORDER BY score DESC
-      LIMIT 20;
+      LIMIT 10;
     `);
 
     res.json(rows);
