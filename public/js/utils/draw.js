@@ -14,7 +14,7 @@
 import { engine } from "../core/init.js";
 
 const defaultColor = "#9aa5a0";
-const defaultSelectedColor = "#6cf2a2";
+const defaultSelectedColor = "#14eb6a";
 
 /**
  * Formats a value as a fixed-width table cell.
@@ -212,4 +212,28 @@ export function drawTable(
 
     drawText(line, x, y + rowHeight * (index + 2), { size, align: "left" });
   });
+}
+
+/**
+ * Draw gridlines on the canvas.
+ * */
+export function drawGrid() {
+  engine.ctx.strokeStyle = "#222";
+  engine.ctx.lineWidth = 1;
+
+  // Vertical lines
+  for (let x = 0; x <= engine.canvas.width; x += engine.TILE_SIZE) {
+    engine.ctx.beginPath();
+    engine.ctx.moveTo(x, 0);
+    engine.ctx.lineTo(x, engine.canvas.height);
+    engine.ctx.stroke();
+  }
+
+  // Horizontal lines
+  for (let y = 0; y <= engine.canvas.height; y += engine.TILE_SIZE) {
+    engine.ctx.beginPath();
+    engine.ctx.moveTo(0, y);
+    engine.ctx.lineTo(engine.canvas.width, y);
+    engine.ctx.stroke();
+  }
 }

@@ -11,9 +11,6 @@ if (!ctxEl) throw new Error("2D context not available");
 console.log(canvasEl);
 console.log(ctxEl);
 
-// Resolution control
-const TILE_SIZE = 20;
-
 // The game is a state machine. These are the states
 export const STATES = Object.freeze({
   MENU: 0,
@@ -36,15 +33,12 @@ export const engine = {
   // Context for the canvas (this is where the game is drawn)
   ctx: ctxEl,
 
+  // Size of each tile
+  TILE_SIZE: 20,
+
   // Always start on the menu
   /** @type {0 | 1 | 2} */
   gameState: STATES.MENU,
-
-  // Game grid, controlled by TITLE_SIZE
-  grid: {
-    cols: canvasEl.width / TILE_SIZE,
-    rows: canvasEl.height / TILE_SIZE,
-  },
 
   // Default settings
   defaults: Object.freeze({
@@ -80,7 +74,7 @@ export const engine = {
 // User settings
 export const defaultSettings = {
   snakeColor: "green",
-  gridLines: true,
+  gridLines: false,
   warpWalls: false,
   soundVolume: 80,
   soundMute: false,
